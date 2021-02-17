@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>album N° {{album.id}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label>
+    <ul>
+      <li>user : {{album.userId}}</li>
+      <li>id : {{album.id}}</li>
+      <li>title : {{album.title}}</li>
+    </ul>
+
+
+    <ion-content>
+      <ion-slides pager="true">
+        <ion-slide *ngFor="let photo of listPhotos" >
+                   <ion-img (click)="afficherPhoto(photo.id)" src="{{photo.thumbnailUrl}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+    </ion-content>
+
+  </ion-label>
+</ion-content>

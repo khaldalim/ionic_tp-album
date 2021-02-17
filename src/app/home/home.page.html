@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Liste des albums
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div id="container">
+    <ion-list>
+      <ion-item *ngFor="let album of listAlbum"  (click)="afficherAlbum(album.id)">
+        <ion-label>
+          <ul>
+            <li>User-id: {{album.userId}}</li>
+            <li>ID: {{album.id}}</li>
+            <li>Title: {{album.title}}</li>
+
+          </ul>
+        </ion-label>
+
+
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>
