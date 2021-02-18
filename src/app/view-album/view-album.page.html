@@ -3,16 +3,26 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>album N° {{album.id}}</ion-title>
+    <ion-title>Album {{album.id}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
   <ion-label>
+    <h2>data album</h2>
     <ul>
-      <li>user : {{album.userId}}</li>
+      <li>user id : {{album.userId}}</li>
       <li>id : {{album.id}}</li>
       <li>title : {{album.title}}</li>
+    </ul>
+
+    <h2>data auteur</h2>
+    <ul>
+      <li>id : {{auteur.id}}</li>
+      <li>username : {{auteur.username}}</li>
+      <li>name : {{auteur.name}}</li>
+      <li>email : {{auteur.email}}</li>
     </ul>
 
 
@@ -22,7 +32,24 @@
                    <ion-img (click)="afficherPhoto(photo.id)" src="{{photo.thumbnailUrl}}"></ion-img>
         </ion-slide>
       </ion-slides>
+
+      <ion-list style="text-align:center">
+        <ion-button color="success" (click)="UpdateAlbumForm(album)">Modifier</ion-button>
+        <ion-button color="danger" (click)="delete(album)">Effacer</ion-button>
+      </ion-list>
+
     </ion-content>
 
   </ion-label>
 </ion-content>
+
+<script>
+  var slides = document.querySelector('ion-slides');
+
+  // Optional parameters to pass to the swiper instance.
+  // See http://idangero.us/swiper/api/ for valid options.
+  slides.options = {
+    initialSlide: 1,
+    speed: 400
+  }
+</script>

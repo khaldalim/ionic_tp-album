@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {Album} from '../modeles/album';
 import {catchError, retry} from 'rxjs/operators';
+import {User} from '../modeles/user';
 
 @Injectable({
   providedIn: 'root'
@@ -37,25 +38,38 @@ export class AlbumService {
       );
   }
 
-  save(album: Album): Observable<Album> {
-    return album.id !== null
-      // create
-      ? this.httpClient
-        .put<Album>(this.apiBaseUrl + '/' + album.id, JSON.stringify(album), this.httpOptions)
-        .pipe(
-          retry(2),
-          catchError(this.handleError)
-        )
-      // update
-      : this.httpClient
-        .post<Album>(this.apiBaseUrl, JSON.stringify(album), this.httpOptions)
-        .pipe(
-          retry(2),
-          catchError(this.handleError)
-        );
+
+  GetAuteur(idUser: number): Observable<User> {
+    return this.httpClient
+      .get<User>('https://jsonplaceholder.typicode.com/users/' + idUser, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+  create(album: Album): Observable<Album> {
+
+    console.log('create');
+    return this.httpClient
+      .post<Album>(this.apiBaseUrl, JSON.stringify(album), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+  update(album: Album): Observable<Album> {
+    console.log('update');
+    return this.httpClient
+      .put<Album>(this.apiBaseUrl + '/' + album.id, JSON.stringify(album), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
   }
 
   delete(album: Album) {
+    console.log('album supprimé');
     return this.httpClient
       .delete(this.apiBaseUrl + '/' + album.id, this.httpOptions)
       .pipe(

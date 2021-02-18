@@ -8,21 +8,30 @@
 
 <ion-content [fullscreen]="true">
 
-  <div id="container">
-    <ion-list>
-      <ion-item *ngFor="let album of listAlbum"  (click)="afficherAlbum(album.id)">
-        <ion-label>
-          <ul>
-            <li>User-id: {{album.userId}}</li>
-            <li>ID: {{album.id}}</li>
-            <li>Title: {{album.title}}</li>
-
-          </ul>
-        </ion-label>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
 
-      </ion-item>
-    </ion-list>
+  <ion-list style="text-align:center">
+    <ion-button color="success" (click)="ajouterAlbum()">Ajouter un album</ion-button>
+  </ion-list>
 
-  </div>
+  <ion-list *ngFor="let album of listAlbum">
+
+    <ion-item (click)="afficherAlbum(album.id)">
+      <ion-label>
+        <ul>
+          <li>Album N°{{album.id}}</li>
+          <li>Title: {{album.title}}</li>
+
+        </ul>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" [disabled]="numTimesLeft <= 0">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Photo} from '../modeles/photo';
+import {Album} from '../modeles/album';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,8 @@ export class PhotoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllByAlbumId(albumId: number): Observable<Photo[]> {
-    console.log(albumId);
-    return this.httpClient.get<Photo[]>(this.apiBaseUrl + '?albumId=' + albumId , this.httpOptions)
+  getAllPhotosByAlbumId(albumId: number): Observable<Photo[]> {
+    return this.httpClient.get<Photo[]>('https://jsonplaceholder.typicode.com/album/' + albumId + '/photos', this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -39,31 +39,25 @@ export class PhotoService {
       );
   }
 
-  save(photo: Photo): Observable<Photo> {
-    return photo.id !== null
-      // create
-      ? this.httpClient
-        .put<Photo>(this.apiBaseUrl + '/' + photo.id, JSON.stringify(photo), this.httpOptions)
-        .pipe(
-          retry(2),
-          catchError(this.handleError)
-        )
-      // update
-      : this.httpClient
-        .post<Photo>(this.apiBaseUrl, JSON.stringify(photo), this.httpOptions)
-        .pipe(
-          retry(2),
-          catchError(this.handleError)
-        );
+
+  update(photo: Photo): Observable<Photo> {
+    console.log('update');
+    return this.httpClient
+      .put<Photo>(this.apiBaseUrl + '/' + photo.id, JSON.stringify(photo), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
   }
 
-  delete(album: Photo) {
+  delete(photo: Photo) {
+    console.log('photo supprimé');
     return this.httpClient
-      .delete(this.apiBaseUrl + '/' + album.id, this.httpOptions)
+      .delete(this.apiBaseUrl + '/' + photo.id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       );
+
   }
 
 // Handle API errors
@@ -82,4 +76,6 @@ export class PhotoService {
     return throwError(
       'Something bad happened; please try again later.');
   }
+
+
 }

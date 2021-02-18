@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Album</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+
+  <form a (ngSubmit)="saveAlbum()" >
+    <ion-item>
+      <ion-label position="floating">ID user :</ion-label>
+      <ion-input type="text" [(ngModel)]="album.userId"  name="userId" required></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-label position="floating">id : </ion-label>
+      <ion-input type="text" [(ngModel)]="album.id" name="idr" required></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-label position="floating">title : </ion-label>
+      <ion-input type="text" [(ngModel)]="album.title" name="title" required></ion-input>
+    </ion-item>
+
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">Enregistrer</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+  </div>
+</ion-content>

@@ -19,6 +19,18 @@ const routes: Routes = [
     path: 'view-photo/:id',
     loadChildren: () => import('./view-photo/view-photo.module').then( m => m.ViewPhotoPageModule)
   },
+  {
+    path: 'add-album',
+    loadChildren: () => import('./album-form/album-form.module').then( m => m.AlbumFormPageModule)
+  },
+  {
+    path: 'update-album/:id',
+    loadChildren: () => import('./album-form/album-form.module').then( m => m.AlbumFormPageModule)
+  },
+  {
+    path: 'update-photo/:id',
+    loadChildren: () => import('./photo-form/photo-form.module').then( m => m.PhotoFormPageModule)
+  },
 
 ];
 
