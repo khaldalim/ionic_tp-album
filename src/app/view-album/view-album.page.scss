@@ -1,6 +1,28 @@
 ion-slides {
-  height: 65%;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 h2{
   text-align: center;
+}
+
+ion-img.ios.hydrated {
+  width: 100%;
+}
+
+ioncard{
+  width: 100%;
+}
+
+.swiper-pagination {
+  bottom: 66% !important;
+}
+
+
+span.image-detail {
+  position: absolute;
+  bottom: 5px;
+  right: 25px;
+  font-size: 15px;
+  color: red;
 }

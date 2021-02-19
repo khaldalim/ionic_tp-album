@@ -9,38 +9,39 @@
 
 <ion-content>
 
-  <ion-label>
-    <h2>data album</h2>
-    <ul>
-      <li>user id : {{album.userId}}</li>
-      <li>id : {{album.id}}</li>
-      <li>title : {{album.title}}</li>
-    </ul>
+  <ion-card>
+    <ion-card-header>
+           <ion-card-title>{{album.title}}</ion-card-title>
+    </ion-card-header>
 
-    <h2>data auteur</h2>
-    <ul>
-      <li>id : {{auteur.id}}</li>
-      <li>username : {{auteur.username}}</li>
-      <li>name : {{auteur.name}}</li>
-      <li>email : {{auteur.email}}</li>
-    </ul>
+    <ion-card-content>
+      <ion-label>
+        <p>username : {{auteur.username}}</p>
+        <p>name : {{auteur.name}}</p>
+        <p>email : {{auteur.email}}</p>
+      </ion-label>
 
 
-    <ion-content>
-      <ion-slides pager="true">
-        <ion-slide *ngFor="let photo of listPhotos" >
-                   <ion-img (click)="afficherPhoto(photo.id)" src="{{photo.thumbnailUrl}}"></ion-img>
-        </ion-slide>
+      <ion-slides>
+        <ion-slide *ngFor="let photo of listPhotos" (click)="afficherPhoto(photo.id)">
+                      <ion-img  src="{{photo.thumbnailUrl}}"></ion-img>
+          <span class="image-detail">Voir le detail</span>
+                  </ion-slide>
       </ion-slides>
 
-      <ion-list style="text-align:center">
+      <ion-list style="text-align:center; background-color: transparent">
         <ion-button color="success" (click)="UpdateAlbumForm(album)">Modifier</ion-button>
         <ion-button color="danger" (click)="delete(album)">Effacer</ion-button>
       </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-    </ion-content>
 
-  </ion-label>
+
+
+
+
+
 </ion-content>
 
 <script>

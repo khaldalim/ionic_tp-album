@@ -4,6 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {Album} from '../modeles/album';
 import {catchError, retry} from 'rxjs/operators';
 import {User} from '../modeles/user';
+import {Photo} from '../modeles/photo';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,15 @@ export class AlbumService {
 
   getAll(): Observable<Album[]> {
     return this.httpClient.get<Album[]>(this.apiBaseUrl, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+
+  getAuteurById(auteurID: number): Observable<User> {
+    return this.httpClient.get<User>('https://jsonplaceholder.typicode.com/users/' + auteurID , this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

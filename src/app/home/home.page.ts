@@ -28,6 +28,7 @@ export class HomePage {
   loadAlbums() {
     // pour ecouter les observable => subscribe
     this.albumService.getAll().subscribe(data => this.listAlbum = data);
+
   }
 
   afficherAlbum(id: number) {
@@ -48,6 +49,6 @@ export class HomePage {
 
 
   loadData($event: any) {
-    
+
   }
 }

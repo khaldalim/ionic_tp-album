@@ -8,13 +8,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-label>
-    <h1>{{photo.title}}</h1>
+   <ion-card>
+  <ion-card-header>
+    <ion-card-title>{{photo.title}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
     <ion-img src="{{photo.thumbnailUrl}}"></ion-img>
 
-    <ion-list style="text-align:center">
+
+    <ion-list style="text-align:center; background-color: transparent">
       <ion-button color="success" (click)="updatePhoto(photo)">Modifier</ion-button>
       <ion-button color="danger" (click)="delete(photo)">Effacer</ion-button>
     </ion-list>
-  </ion-label>
+  </ion-card-content>
+  </ion-card>
 </ion-content>

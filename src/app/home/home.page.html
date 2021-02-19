@@ -14,21 +14,19 @@
 
 
   <ion-list style="text-align:center">
+    <h1>Liste des Albums</h1>
     <ion-button color="success" (click)="ajouterAlbum()">Ajouter un album</ion-button>
   </ion-list>
 
-  <ion-list *ngFor="let album of listAlbum">
 
-    <ion-item (click)="afficherAlbum(album.id)">
-      <ion-label>
-        <ul>
-          <li>Album N°{{album.id}}</li>
-          <li>Title: {{album.title}}</li>
+  <ion-card *ngFor="let album of listAlbum">
+    <ion-card-content (click)="afficherAlbum(album.id)">
+      <ion-card-subtitle>Album N°{{album.id}}</ion-card-subtitle>
+        <ion-card-title>{{album.title}}</ion-card-title>
+      <p style="text-align: right; margin-top: 7px"><span style="color: red">Voir l'album</span></p>
+    </ion-card-content>
+  </ion-card>
 
-        </ul>
-      </ion-label>
-    </ion-item>
-  </ion-list>
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" [disabled]="numTimesLeft <= 0">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
